@@ -25,9 +25,7 @@ sealed class TextImageNode {
         layout()
         val canvas = TextImageCanvas(width, height)
         this.graphics2D = canvas.graphics // We need graphics to measure fonts in the measure functions
-        graphics2D.setRenderingHint(
-            RenderingHints.KEY_ANTIALIASING,
-            RenderingHints.VALUE_ANTIALIAS_ON);
+        graphics2D.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         renderTo(canvas)
         return canvas
     }
@@ -49,7 +47,6 @@ class TextNode(private val value: String) : TextImageNode() {
     override fun layout() {
         val fontMetrics = graphics2D.getFontMetrics(font)
         y = y + fontMetrics.ascent - fontMetrics.descent
-        // No children so nothing to layout
     }
 
     override fun renderTo(canvas: TextImageCanvas) {
@@ -64,6 +61,9 @@ class VerticalLayoutNode() : TextImageNode() {
     val children = mutableListOf<TextImageNode>()
 
     override fun measure() {
+        var width = 0
+        var height = 0
+
         children.forEach {
             it.measure()
             width = max(width, it.width)
