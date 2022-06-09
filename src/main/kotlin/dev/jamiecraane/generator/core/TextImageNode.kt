@@ -34,14 +34,24 @@ sealed class TextImageNode {
 /**
  * Represents text to be rendered in text image.
  */
-class TextNode(private val value: String) : TextImageNode() {
+class TextNode(initialValue: String = "") : TextImageNode() {
     // Fixed font for now
     private val font = Font("SansSerif", Font.PLAIN, 12)
 
+    private var sizeInvalidated = true
+    var value: String = initialValue
+        set(value) {
+            field = value
+            sizeInvalidated = true
+        }
+
     override fun measure() {
-        val fontMetrics = graphics2D.getFontMetrics(font)
-        width = fontMetrics.stringWidth(value)
-        height = fontMetrics.ascent - fontMetrics.descent
+        if (sizeInvalidated) {
+            val fontMetrics = graphics2D.getFontMetrics(font)
+            width = fontMetrics.stringWidth(value)
+            height = fontMetrics.ascent - fontMetrics.descent
+            sizeInvalidated = false
+        }
     }
 
     override fun layout() {

@@ -1,13 +1,13 @@
 package dev.jamiecraane.generator
 
 import dev.jamiecraane.generator.compose.Text
-import dev.jamiecraane.generator.compose.TextImage
+import dev.jamiecraane.generator.compose.StaticTextImage
 import dev.jamiecraane.generator.compose.VStack
 import imageexporter.PngImageWriter
 import java.io.File
 
 fun main(args: Array<String>) {
-    val output = TextImage {
+    val output = StaticTextImage {
         VStack {
             Text("Hello World")
 

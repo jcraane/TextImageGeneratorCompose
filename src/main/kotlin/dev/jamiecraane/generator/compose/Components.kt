@@ -9,7 +9,11 @@ import dev.jamiecraane.generator.core.VerticalLayoutNode
 fun Text(value: String) {
     ComposeNode<TextNode, TextImageNodeApplier>(
         factory = { TextNode(value) },
-        update = {}
+        update = {
+            set(value) {
+                this.value = value
+            }
+        }
     )
 }
 
