@@ -17,8 +17,8 @@ fun main(args: Array<String>) {
         }
 
         for (i in 0..10) {
-            count++
             delay(5000)
+            count++
         }
     }
 }
